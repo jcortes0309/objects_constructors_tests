@@ -21,7 +21,6 @@ Card.prototype.getImageUrl = function() {
 // Hand Constructor
 function Hand() {
   this.handArray = [];
-  // console.log("Hand Array from the Hand function", this.handArray);
   this.points = 0;
 }
 
@@ -33,9 +32,7 @@ function Hand() {
 // };
 
 // addCard method
-// My example
 Hand.prototype.addCard = function (card) {
-  // console.log("Card from addCard method", card);
   return this.handArray.push(card);
 };
 
@@ -43,7 +40,6 @@ Hand.prototype.getPoints = function () {
   var addPoint = 0;
   var pointList = [];
 
-  console.log("handArray in getPoints before for loop = ", this.handArray);
   for (var idxCard in this.handArray) {
     var card = this.handArray[idxCard];
     if (card.point >= 10) {
@@ -67,7 +63,6 @@ Hand.prototype.getPoints = function () {
       }
     }
   }
-  console.log("handArray = ", this.handArray);
-  console.log("this.points = ", this.points);
+
   return this.points;
 };
