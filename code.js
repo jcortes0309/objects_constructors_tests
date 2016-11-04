@@ -6,21 +6,22 @@ function Card(point, suit) {
 
 // getImageUrl method
 Card.prototype.getImageUrl = function() {
-  if (this.point === 11) {
-    this.point = 'jack';
-  } else if (this.point === 12) {
-    this.point = 'queen';
-  } else if (this.point === 13) {
-    this.point = 'king';
-  } else if (this.point === 1) {
-    this.point = 'ace';
+  var name = this.point;
+  if (name === 11) {
+    name = 'jack';
+  } else if (name === 12) {
+    name = 'queen';
+  } else if (name === 13) {
+    name = 'king';
+  } else if (name === 1) {
+    name = 'ace';
   }
-  return 'images/' + this.point + '_of_' + this.suit + '.png';
+  return 'images/' + name + '_of_' + this.suit + '.png';
 };
 
 // Hand Constructor
 function Hand() {
-  this.handArray = [];
+  this.cardArray = [];
   this.points = 0;
 }
 
@@ -28,20 +29,20 @@ function Hand() {
 // // Rob's example
 // Hand.prototype.addCard = function (point, suit) {
 //   var card = new Card(point, suit);
-//   return this.handArray.push(card);
+//   return this.cardArray.push(card);
 // };
 
 // addCard method
 Hand.prototype.addCard = function (card) {
-  return this.handArray.push(card);
+  return this.cardArray.push(card);
 };
 
 Hand.prototype.getPoints = function () {
   var addPoint = 0;
   var pointList = [];
 
-  for (var idxCard in this.handArray) {
-    var card = this.handArray[idxCard];
+  for (var idxCard in this.cardArray) {
+    var card = this.cardArray[idxCard];
     if (card.point >= 10) {
       addPoint = 10;
     } else if (card.point === 1) {
@@ -65,4 +66,39 @@ Hand.prototype.getPoints = function () {
   }
 
   return this.points;
+};
+
+// Deck Constructor
+function Deck() {
+  this.cardArray = [];
+
+  for (var i = 1; i <= 13; i++) {
+    this.cardArray.push(new Card(i, 'diamonds'));
+    this.cardArray.push(new Card(i, 'clubs'));
+    this.cardArray.push(new Card(i, 'hearts'));
+    this.cardArray.push(new Card(i, 'spades'));
+  }
+}
+
+Deck.prototype.numOfCards = function () {
+  return this.cardArray.length;
+};
+
+Deck.prototype.draw = function () {
+  return this.cardArray.pop();
+};
+
+Deck.prototype.getCard = function (i) {
+  return this.cardArray[i - 1];
+};
+
+Deck.prototype.shuffle = function () {
+  for (var i = 0; i < this.cardArray.length; i++) {
+    var rand = Math.floor(Math.random() * this.cardArray.length),
+        rand2 = Math.floor(Math.random() * this.cardArray.length),
+        temp;
+    temp = this.cardArray[rand];
+    this.cardArray[rand] = this.cardArray[rand2];
+    this.cardArray[rand2] = temp;
+  }
 };
