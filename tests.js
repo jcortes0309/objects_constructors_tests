@@ -50,3 +50,62 @@ describe('Card', function () {
   });
 
 });
+
+
+describe('Hand', function () {
+
+  it('should instantiate an empty hand', function () {
+    var myHand = new Hand();
+    expect(myHand.getPoints()).toEqual(0);
+  });
+
+  // Rob's example
+  // it('should add new card of diamonds suit to myHand', function () {
+  //   var myHand = new Hand();
+  //   myHand.addCard(5, 'diamonds');
+  //   expect(myHand.handArray[0].suit).toEqual('diamonds');
+  // });
+
+  // My example
+  it('should add a new diamonds suit card to myHand', function () {
+    var myHand = new Hand();
+    myHand.addCard(new Card(5, 'diamonds'));
+    expect(myHand.handArray[0].suit).toEqual('diamonds');
+  });
+
+  it('should add two new cards to myHand of diamonds and spades suits', function () {
+    var myHand = new Hand();
+    myHand.addCard(new Card(5, 'diamonds'));
+    expect(myHand.handArray[0].suit).toEqual('diamonds');
+    myHand.addCard(new Card(13, 'spades'));
+    expect(myHand.handArray[1].suit).toEqual('spades');
+  });
+
+  it('should return the points of one card', function () {
+    var myHand = new Hand();
+    myHand.addCard(new Card(5, 'diamonds'));
+    expect(myHand.getPoints()).toEqual(5);
+  });
+
+  it('should return the points of two cards', function () {
+    var myHand = new Hand();
+    myHand.addCard(new Card(5, 'diamonds'));
+    myHand.addCard(new Card(5, 'spades'));
+    expect(myHand.getPoints()).toEqual(10);
+  });
+
+  it('should return the points of three cards', function () {
+    var myHand = new Hand();
+    myHand.addCard(new Card(1, 'diamonds'));
+    myHand.addCard(new Card(5, 'spades'));
+    myHand.addCard(new Card(13, 'spades'));
+    expect(myHand.getPoints()).toEqual(16);
+  });
+
+
+
+
+
+
+
+});
